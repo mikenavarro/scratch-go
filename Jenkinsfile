@@ -4,7 +4,7 @@ pipeline {
         stage('Build') { 
             steps {
                 checkout scm
-                sh 'docker build -t mikenavarro/scratch-go .'
+                def customImage = docker.build("my-image:latest")
             }
         }
         stage('Deploy') {
