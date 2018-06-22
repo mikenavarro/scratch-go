@@ -1,11 +1,11 @@
 pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
-            }
-        }
+node {
+    checkout scm
+
+    def customImage = docker.build("my-image:latest")
+
+    customImage.inside {
+        sh 'make test'
     }
+}
 }
